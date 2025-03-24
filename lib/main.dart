@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'data.dart'; // Import the data file
+import 'data.dart'; 
+import 'interview_screen.dart'; 
 
 void main() {
   runApp(const AIInterviewer());
@@ -347,7 +348,7 @@ class FavoritesScreen extends StatelessWidget {
                             image: role["image"]!,
                             duration: role["duration"]!,
                             rating: role["rating"]!,
-                            description: role["description"]!, // Pass description
+                            description: role["description"]!, 
                             isFavorite: true,
                             onFavoriteToggle: () {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -418,7 +419,7 @@ class CategoryRolesScreen extends StatelessWidget {
                             image: role["image"]!,
                             duration: role["duration"]!,
                             rating: role["rating"]!,
-                            description: role["description"]!, // Pass description
+                            description: role["description"]!, 
                             isFavorite: favoriteRoles.contains(role["title"]),
                             onFavoriteToggle: () => onFavoriteToggle(role["title"]!),
                           ),
@@ -463,15 +464,14 @@ class _RoleDetailScreenState extends State<RoleDetailScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize the favorite state
     _isFavorite = widget.isFavorite;
   }
 
   void _toggleFavorite() {
     setState(() {
-      _isFavorite = !_isFavorite; // Toggle the favorite state
+      _isFavorite = !_isFavorite;
     });
-    widget.onFavoriteToggle(); // Trigger the parent's favorite toggle
+    widget.onFavoriteToggle();
   }
 
   @override
@@ -483,7 +483,7 @@ class _RoleDetailScreenState extends State<RoleDetailScreen> {
           IconButton(
             icon: Icon(
               _isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: _isFavorite ? Colors.red : Colors.black, // Black outline when not favorited
+              color: _isFavorite ? Colors.red : Colors.black,
             ),
             onPressed: _toggleFavorite,
           ),
@@ -545,9 +545,11 @@ class _RoleDetailScreenState extends State<RoleDetailScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Start the interview
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Starting the interview...")),
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => InterviewScreen(roleTitle: widget.title),
+            ),
           );
         },
         child: const Icon(Icons.play_arrow),
