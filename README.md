@@ -1,4 +1,4 @@
-# diy_app
+# InterVU - AI Interviewer
 
 A new Flutter project.
 
